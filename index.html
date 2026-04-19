@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dengue Forecast Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f5f7fa;
+        }
+        header {
+            background: #1f2937;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Dengue Incidence Forecast Dashboard
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Project Summary</h2>
+        <p>
+            This dashboard visualizes dengue prediction results using machine learning models.
+            KNN achieved the best overall performance, while SVR performed best for Iquitos.
+        </p>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Model Comparison (MAE)</h3>
+            <canvas id="modelChart"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Feature Reduction</h3>
+            <canvas id="featureChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Model Performance Chart
+    const modelChart = new Chart(document.getElementById('modelChart'), {
+        type: 'bar',
+        data: {
+            labels: ['KNN', 'RF', 'GBR', 'SVR'],
+            datasets: [
+                {
+                    label: 'San Juan (MAE)',
+                    data: [20, 35, 33, 25] // replace with your real values
+                },
+                {
+                    label: 'Iquitos (MAE)',
+                    data: [22, 36, 34, 18] // replace with your real values
+                }
+            ]
+        }
+    });
+
+    // Feature Reduction Chart
+    const featureChart = new Chart(document.getElementById('featureChart'), {
+        type: 'bar',
+        data: {
+            labels: ['San Juan', 'Iquitos'],
+            datasets: [
+                {
+                    label: 'Before',
+                    data: [16, 16]
+                },
+                {
+                    label: 'After',
+                    data: [11, 8]
+                }
+            ]
+        }
+    });
+</script>
+
+</body>
+</html>
