@@ -4,6 +4,13 @@
 This project predicts dengue cases using machine learning models trained on meteorological data. It explores how environmental factors influence outbreaks and builds a forecasting pipeline for two cities.
 
 ---
+## Dashboard
+
+### Page 1 — Outbreak & Climate Analysis
+![Dashboard Page 1](dashboard_page1.png)
+
+### Page 2 — Forecasting Model Comparison
+![Dashboard Page 2](dashboard_page2.png)
 
 ## Workflow
 
