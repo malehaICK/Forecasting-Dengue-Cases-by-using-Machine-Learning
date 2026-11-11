@@ -7,10 +7,10 @@ This project predicts dengue cases using machine learning models trained on mete
 ## Dashboard
 
 ### Page 1 — Outbreak & Climate Analysis
-![Dashboard Page 1](dashboard_page1.png)
+![Dashboard Page 1](images/dashboard_page1.png)
 
 ### Page 2 — Forecasting Model Comparison
-![Dashboard Page 2](dashboard_page2.png)
+![Dashboard Page 2](images/dashboard_page2.png)
 
 ## Workflow
 
