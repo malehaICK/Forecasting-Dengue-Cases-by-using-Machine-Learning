@@ -92,6 +92,10 @@ flowchart LR
 - Standardized the features before modeling  
 - Random 70/30 train/test split for each city  
 
+### Feature Selection
+- Correlation of each of the 20 climate and vegetation variables with weekly cases, measured on the training data only  
+- Kept features with a correlation of at least 0.10 and dropped negative and weak ones (see [`scripts/feature_selection.py`](scripts/feature_selection.py))  
+
 ### Models Used
 - K-Nearest Neighbors (KNN)  
 - Random Forest (RF)  
@@ -116,13 +120,35 @@ flowchart LR
 | GBR  | 17.15    | 6.66    | 11.91 |
 | SVR  | 19.93    | **4.91** | 12.42 |
 
-MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](notebooks/main.ipynb). Results can shift slightly between runs because the split and the tree-based models are not seeded.
+MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](notebooks/main.ipynb). Results change noticeably between runs because the split and the tree-based models are not seeded; the seeded run in the next section ranks the models differently.
+
+### Feature Selection Results
+
+Each city starts with 20 candidate features. Features are kept only if their correlation with weekly cases (training data only) is at least 0.10.
+
+![Feature correlations](images/feature_correlations.png)
+
+| City | Candidates | Selected (random split) | Selected (chronological split) |
+|------|-----------|-------------------------|--------------------------------|
+| San Juan | 20 | 11 | 11 |
+| Iquitos  | 20 | 8  | 6  |
+
+MAE on a seeded random 70/30 split (year dummies kept), all features vs selected features:
+
+| Model | San Juan: all | San Juan: selected | Iquitos: all | Iquitos: selected |
+|------|------|------|------|------|
+| KNN | 21.61 | 21.77 | 5.58 | 5.48 |
+| RF  | 21.17 | 21.05 | 5.96 | 5.41 |
+| GBR | 20.14 | 20.47 | 6.06 | 6.16 |
+| SVR | 24.07 | 23.60 | 5.20 | 5.07 |
+
+Selection removed 45% (San Juan) and 60% (Iquitos) of the variables with changes in MAE of roughly ±0.5 or less, so it simplifies the model without hurting accuracy on this split. It does **not** consistently improve accuracy, and on a chronological split (train on the earlier 70% of weeks, test on the latest 30%) the effect was mixed, for example Gradient Boosting in San Juan went from 29.25 to 31.77. Chronological errors are also much higher than random-split errors (KNN in San Juan: 29.5 vs 21.6), so a random split makes the models look better than they would be at forecasting future weeks. Full numbers are in [`results/feature_selection_results.csv`](results/feature_selection_results.csv).
 
 ---
 
 ### Key Findings
 
-- KNN had the lowest average MAE across both cities, and the best score for San Juan  
+- Model ranking is not stable: KNN had the lowest average MAE in the notebook run, but Gradient Boosting was best on the seeded split, so the four models perform similarly  
 - SVR performed best for Iquitos, but worst for San Juan  
 - Weather variables strongly influence dengue cases  
 
@@ -130,7 +156,7 @@ MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](note
 
 ### Final Insight
 
-Lower MAE indicates better prediction accuracy. KNN gave the lowest average error in this study, although its margin over Random Forest and Gradient Boosting is small.
+Lower MAE indicates better prediction accuracy. In the notebook run KNN gave the lowest average error, but the margin over Random Forest and Gradient Boosting is small and the ranking changes with the random split, so no single model clearly wins.
 
 ---
 
@@ -151,6 +177,8 @@ The analysis is in [`notebooks/main.ipynb`](notebooks/main.ipynb) and was develo
 1. Open the notebook in Google Colab (File → Upload notebook).
 2. Upload the CSV files from [`data/`](data/) to Colab's `/content/` folder, which is where the notebook reads them from.
 3. Run all cells.
+
+To reproduce the feature selection results from the files in this repository, run `pip install pandas scikit-learn matplotlib` and then `python scripts/feature_selection.py`.
 
 **Note:** the notebook also reads per-city files that are not in this repository (`SJ_dengue_labels_train_521.csv`, `IQ_dengue_labels_train_521.csv`, `SJ_dengue_features_test_417-null-data.csv` and `test_iq.csv`). The repository contains the combined `dengue_labels_train_1457.csv` and `dengue_features_test_417.csv` instead, which have to be split by city to match.
 

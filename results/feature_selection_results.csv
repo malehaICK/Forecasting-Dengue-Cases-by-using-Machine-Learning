@@ -1,0 +1,33 @@
+split,city,features,n_climate_features,model,mae
+random,San Juan,all features,20,KNN,21.61
+random,San Juan,all features,20,RF,21.17
+random,San Juan,all features,20,GBR,20.14
+random,San Juan,all features,20,SVR,24.07
+random,San Juan,selected features,11,KNN,21.77
+random,San Juan,selected features,11,RF,21.05
+random,San Juan,selected features,11,GBR,20.47
+random,San Juan,selected features,11,SVR,23.6
+random,Iquitos,all features,20,KNN,5.58
+random,Iquitos,all features,20,RF,5.96
+random,Iquitos,all features,20,GBR,6.06
+random,Iquitos,all features,20,SVR,5.2
+random,Iquitos,selected features,8,KNN,5.48
+random,Iquitos,selected features,8,RF,5.41
+random,Iquitos,selected features,8,GBR,6.16
+random,Iquitos,selected features,8,SVR,5.07
+chronological,San Juan,all features,20,KNN,29.53
+chronological,San Juan,all features,20,RF,34.53
+chronological,San Juan,all features,20,GBR,29.25
+chronological,San Juan,all features,20,SVR,18.05
+chronological,San Juan,selected features,11,KNN,28.48
+chronological,San Juan,selected features,11,RF,35.71
+chronological,San Juan,selected features,11,GBR,31.77
+chronological,San Juan,selected features,11,SVR,18.17
+chronological,Iquitos,all features,20,KNN,7.98
+chronological,Iquitos,all features,20,RF,7.8
+chronological,Iquitos,all features,20,GBR,7.69
+chronological,Iquitos,all features,20,SVR,7.42
+chronological,Iquitos,selected features,6,KNN,8.62
+chronological,Iquitos,selected features,6,RF,8.09
+chronological,Iquitos,selected features,6,GBR,8.02
+chronological,Iquitos,selected features,6,SVR,7.42
