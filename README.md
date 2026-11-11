@@ -22,7 +22,7 @@ flowchart LR
     end
 
     subgraph Features
-        C[Feature Selection]
+        C[Feature Preparation]
     end
 
     subgraph Modeling
@@ -72,7 +72,7 @@ DrivenData DengAI Dataset
 ```mermaid
 flowchart LR
     A[Raw Dataset] --> B[Data Preprocessing]
-    B --> C[Feature Selection]
+    B --> C[Feature Preparation]
     C --> D[Model Training]
     D --> E[Evaluation]
     E --> F[Model Comparison]
@@ -86,9 +86,11 @@ flowchart LR
 - Temperature unit conversion  
 - Rounding for consistency  
 
-### Feature Selection
-- Correlation analysis to identify important features  
-- Removed negatively correlated and weak features  
+### Feature Preparation
+- Dropped identifier and date columns (city, week of year, week start date)  
+- One-hot encoded the year, dropping one year column to avoid the dummy variable trap  
+- Standardized the features before modeling  
+- Random 70/30 train/test split for each city  
 
 ### Models Used
 - K-Nearest Neighbors (KNN)  
@@ -118,33 +120,17 @@ MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](note
 
 ---
 
-### Impact of Feature Selection
-
-```mermaid
-flowchart LR
-    A[All Features] --> B[Correlation Analysis]
-    B --> C[Selected Features]
-    C --> D[Improved Accuracy]
-```
-
-- San Juan: 16 → 11 features  
-- Iquitos: 16 → 8 features  
-- Reduced noise and improved model performance  
-
----
-
 ### Key Findings
 
 - KNN had the lowest average MAE across both cities, and the best score for San Juan  
 - SVR performed best for Iquitos, but worst for San Juan  
-- Feature selection significantly improved results  
 - Weather variables strongly influence dengue cases  
 
 ---
 
 ### Final Insight
 
-Lower MAE indicates better prediction accuracy. KNN gave the lowest average error in this study, although its margin over Random Forest and Gradient Boosting is small, so the choice of model matters less than the preprocessing and feature work.
+Lower MAE indicates better prediction accuracy. KNN gave the lowest average error in this study, although its margin over Random Forest and Gradient Boosting is small.
 
 ---
 
