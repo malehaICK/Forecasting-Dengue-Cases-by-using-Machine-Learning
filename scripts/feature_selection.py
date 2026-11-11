@@ -10,7 +10,7 @@ For each city (San Juan, Iquitos) the script:
      on all features versus on the selected features.
 
 Two evaluation setups are reported:
-  random        random 70/30 split (as in notebooks/main.ipynb), with year
+  random        random 70/30 split (as in notebooks/thesis2_SJ.ipynb), with year
                 dummies always kept as extra features.
   chronological first 70% of weeks for training, last 30% for testing, with no
                 year dummies. This is closer to real forecasting.

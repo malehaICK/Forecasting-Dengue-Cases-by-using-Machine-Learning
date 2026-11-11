@@ -120,7 +120,7 @@ flowchart LR
 | GBR  | 17.15    | 6.66    | 11.91 |
 | SVR  | 19.93    | **4.91** | 12.42 |
 
-MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](notebooks/main.ipynb). Results change noticeably between runs because the split and the tree-based models are not seeded; the seeded run in the next section ranks the models differently.
+MAE on a held-out test split, from a single run of [`notebooks/thesis2_SJ.ipynb`](notebooks/thesis2_SJ.ipynb). Results change noticeably between runs because the split and the tree-based models are not seeded; the seeded run in the next section ranks the models differently.
 
 ### Feature Selection Results
 
@@ -172,7 +172,7 @@ Lower MAE indicates better prediction accuracy. In the notebook run KNN gave the
 
 ## How to Run
 
-The analysis is in [`notebooks/main.ipynb`](notebooks/main.ipynb) and was developed in Google Colab.
+The analysis is in [`notebooks/thesis2_SJ.ipynb`](notebooks/thesis2_SJ.ipynb) and was developed in Google Colab.
 
 1. Open the notebook in Google Colab (File → Upload notebook).
 2. Upload the CSV files from [`data/`](data/) to Colab's `/content/` folder, which is where the notebook reads them from.
