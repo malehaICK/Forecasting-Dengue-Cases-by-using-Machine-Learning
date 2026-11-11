@@ -107,12 +107,14 @@ flowchart LR
 
 ### Model Performance (MAE ↓)
 
-| Model | San Juan | Iquitos | Performance |
-|------|----------|---------|-------------|
-| KNN  | Lowest   | Low     | Best overall |
-| RF   | Medium   | Medium  | Stable |
-| GBR  | Medium   | Medium  | Comparable |
-| SVR  | Low      | Lowest  | Best for Iquitos |
+| Model | San Juan | Iquitos | Average |
+|------|----------|---------|---------|
+| KNN  | **16.88** | 6.31   | **11.60** |
+| RF   | 17.34    | 6.34    | 11.84 |
+| GBR  | 17.15    | 6.66    | 11.91 |
+| SVR  | 19.93    | **4.91** | 12.42 |
+
+MAE on a held-out test split, from a single run of [`notebooks/main.ipynb`](notebooks/main.ipynb). Results can shift slightly between runs because the split and the tree-based models are not seeded.
 
 ---
 
@@ -133,8 +135,8 @@ flowchart LR
 
 ### Key Findings
 
-- KNN achieved the best overall performance  
-- SVR performed best for Iquitos  
+- KNN had the lowest average MAE across both cities, and the best score for San Juan  
+- SVR performed best for Iquitos, but worst for San Juan  
 - Feature selection significantly improved results  
 - Weather variables strongly influence dengue cases  
 
@@ -142,7 +144,7 @@ flowchart LR
 
 ### Final Insight
 
-Lower MAE indicates better prediction accuracy. KNN proved to be the most reliable model for dengue forecasting in this study.
+Lower MAE indicates better prediction accuracy. KNN gave the lowest average error in this study, although its margin over Random Forest and Gradient Boosting is small, so the choice of model matters less than the preprocessing and feature work.
 
 ---
 
@@ -158,12 +160,13 @@ Lower MAE indicates better prediction accuracy. KNN proved to be the most reliab
 
 ## How to Run
 
-```
-git clone <your-repo-link>
-cd <project-folder>
-pip install -r requirements.txt
-python main.py
-```
+The analysis is in [`notebooks/main.ipynb`](notebooks/main.ipynb) and was developed in Google Colab.
+
+1. Open the notebook in Google Colab (File → Upload notebook).
+2. Upload the CSV files from [`data/`](data/) to Colab's `/content/` folder, which is where the notebook reads them from.
+3. Run all cells.
+
+**Note:** the notebook also reads per-city files that are not in this repository (`SJ_dengue_labels_train_521.csv`, `IQ_dengue_labels_train_521.csv`, `SJ_dengue_features_test_417-null-data.csv` and `test_iq.csv`). The repository contains the combined `dengue_labels_train_1457.csv` and `dengue_features_test_417.csv` instead, which have to be split by city to match.
 
 ---
 
